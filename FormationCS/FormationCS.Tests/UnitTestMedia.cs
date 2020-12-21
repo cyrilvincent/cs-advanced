@@ -5,6 +5,7 @@ using FormationCS.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using FormationCS.Contexts;
 
 namespace FormationCS.Tests
 {
@@ -58,6 +59,17 @@ namespace FormationCS.Tests
             IEnumerable<int> res = ie.Where(lambda);
             List<int> res2 = ie.Where(lambda).ToList();
             Assert.AreEqual(2, res2[0]);
+        }
+
+        [Test]
+        public void TestEFSimple()
+        {
+            MediaContext context = new MediaContext();
+            context.Books.Add(new Book { Title = "C#", Price = 10 });
+            context.Books.Add(new Book { Title = "EF", Price = 12 });
+            context.SaveChanges();
+            var res = context.Books.Where(b => b.Price < 11).First();
+            Assert.AreEqual("C#", res.Title);
         }
 
 
