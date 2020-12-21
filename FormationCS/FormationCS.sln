@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormationCS", "FormationCS\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormationCS.Tests", "FormationCS.Tests\FormationCS.Tests.csproj", "{29475E33-EA87-4CCD-81C6-07E5D727C406}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YieldDemo", "YieldDemo\YieldDemo.csproj", "{553DB292-BCEA-42AE-BFFD-7EE3F7E85FCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{29475E33-EA87-4CCD-81C6-07E5D727C406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29475E33-EA87-4CCD-81C6-07E5D727C406}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29475E33-EA87-4CCD-81C6-07E5D727C406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{553DB292-BCEA-42AE-BFFD-7EE3F7E85FCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{553DB292-BCEA-42AE-BFFD-7EE3F7E85FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{553DB292-BCEA-42AE-BFFD-7EE3F7E85FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{553DB292-BCEA-42AE-BFFD-7EE3F7E85FCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -54,7 +54,7 @@ namespace FormationCS.Tests
         }
 
         [Test]
-        public void TestWithdraw()
+        public void TestLinq()
         {
             IBankService service = new BankService();
             Bank bank = new Bank { Id = 1, Name = "Banque de France" };
