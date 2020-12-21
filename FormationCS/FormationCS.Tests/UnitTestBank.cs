@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using FormationCS.Entities;
 using FormationCS.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace FormationCS.Tests
 {
@@ -57,11 +59,19 @@ namespace FormationCS.Tests
             IBankService service = new BankService();
             Bank bank = new Bank { Id = 1, Name = "Banque de France" };
             Client owner = new Client { Id = 1, FirstName = "Cyril", LastName = "Vincent" };
-            /* Créer un IEnumerable d'Account
-             * Filtrer les comptes avec un balance > 1000
-             * Trier les comptes par balance
-             * Chercher le 1er compte avec une balance > 1000 .First .FirstOrDefault . Single .SingleDefault
-             */ 
+            List<Account> accounts = new List<Account>();
+            Account account1 = service.CreateAccount(bank, owner);
+            Account account2 = service.CreateAccount(bank, new Client { FirstName = "Toto", LastName = "Titi" });
+            Account account3 = service.CreateAccount(bank, new Client { FirstName = "Tutu", LastName = "Tata" });
+            accounts.Add(account1);
+            accounts.Add(account2);
+            accounts.Add(account3);
+            service.Deposit(account1, 2000);
+            IEnumerable<Account> results = accounts.Where(a => a.Balance > 1000).OrderBy(a => a.Balance);
+            Assert.AreEqual(account1, results.FirstOrDefault());
+            results = accounts.Where(a => a.Balance > 3000);
+            Assert.IsNull(results.FirstOrDefault());
+            accounts.Where(a => a.Owner.FirstName != null && a.Owner.FirstName == "Cyril");
         }
 
 

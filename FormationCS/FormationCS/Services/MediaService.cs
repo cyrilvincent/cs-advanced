@@ -12,7 +12,7 @@ namespace FormationCS.Services
         private IEnumerable<Book> books = new List<Book>()
         {
             new Book {Id=1, Price=10, Title="C#" }
-        }; // A sortir dans un contexte
+        };
 
         public Cart AddToCart(Book book)
         {
