@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace FormationCS.Entities
 {
-    public class Client
+    public class BankException : Exception
     {
-        public long Id { get; init; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public BankException(string message) : base(message)
+        {
+        }
     }
 }

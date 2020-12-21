@@ -8,7 +8,7 @@ namespace FormationCS.Entities
 {
     public class Bank
     {
-        public int Id { get; init; }
+        public long Id { get; init; }
         public string Name { get; set; }
     }
 }
