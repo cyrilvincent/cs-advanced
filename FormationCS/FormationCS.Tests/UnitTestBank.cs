@@ -51,6 +51,19 @@ namespace FormationCS.Tests
             Assert.Throws<BankException>(() => service.Withdraw(account, 70));
         }
 
+        [Test]
+        public void TestWithdraw()
+        {
+            IBankService service = new BankService();
+            Bank bank = new Bank { Id = 1, Name = "Banque de France" };
+            Client owner = new Client { Id = 1, FirstName = "Cyril", LastName = "Vincent" };
+            /* Créer un IEnumerable d'Account
+             * Filtrer les comptes avec un balance > 1000
+             * Trier les comptes par balance
+             * Chercher le 1er compte avec une balance > 1000 .First .FirstOrDefault . Single .SingleDefault
+             */ 
+        }
+
 
     }
 }

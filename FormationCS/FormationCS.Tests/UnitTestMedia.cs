@@ -1,10 +1,14 @@
 using FormationCS.Entities;
 using FormationCS.Services;
 using NUnit.Framework;
+using FormationCS.Extensions;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace FormationCS.Tests
 {
-    public class Tests
+    public class MediaTests
     {
         [SetUp]
         public void Setup()
@@ -35,8 +39,25 @@ namespace FormationCS.Tests
         public void TestMediaService()
         {
             IMediaService service = new MediaService();
-            Book b = service.GetById(1);
-            Assert.AreEqual(1, b.Id);
+            /*Book b = service.GetById(1);
+            Assert.AreEqual(1, b.Id);*/
+        }
+
+        [Test]
+        public void TestCAMLCase()
+        {
+            string s = "cyril";
+            Assert.AreEqual("Cyril",s.ToCAMLCase());
+        }
+
+        [Test]
+        public void TestFirstLINQ()
+        {
+            IEnumerable<int> ie = new List<int>() { 1, 2, 3, 4 };
+            Func<int, bool> lambda = x => x % 2 == 0;
+            IEnumerable<int> res = ie.Where(lambda);
+            List<int> res2 = ie.Where(lambda).ToList();
+            Assert.AreEqual(2, res2[0]);
         }
 
 
