@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FormationCS.Entities
 {
-    public class Cart
+    public class Cart : IEntity
     {
+        public long Id { get; set; }
     }
 }

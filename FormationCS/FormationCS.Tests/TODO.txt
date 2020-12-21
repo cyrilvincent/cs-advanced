@@ -1,0 +1,88 @@
+﻿
+        0/ Renommer le contexte en FormationContext
+        1/ Reprendre dans le détail la configuration Book
+        2/ TP : Idem pour Bank (avec Ignore) (1 seul contexte)
+        3/ Faire 1-N avec Publisher-*Book (s'inspirer de ci dessous)
+        3.1/ Lazy & Include
+        4/ TP : Account-*Transactions et Bank-*Account
+        5/ N-M avec Cart
+        6/ TP : Bank*-*Client
+        7/ Services
+        8/ Adapter + DTO
+        
+        Mettre virtual sur les propriétés de navigation
+        Ajouter dans Transaction :         public virtual Account Account { get; set; }
+
+        public class AccountConfiguration : IEntityTypeConfiguration<Account>
+    {
+        public void Configure(EntityTypeBuilder<Account> builder)
+        {
+            builder.ToTable("account");
+            builder.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
+            builder.HasKey(e => e.Id);
+            builder.Ignore(e => e.Bank);
+            builder.Ignore(e => e.Owner);
+            builder.Property(e => e.Balance).HasColumnName("balance").IsRequired();
+            builder.Property(e => e.IsClose).HasColumnName("isclose").IsRequired();
+            builder.HasMany(e => e.Transactions).WithOne();
+
+        }
+    }
+
+        public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
+    {
+        public void Configure(EntityTypeBuilder<Transaction> builder)
+        {
+            builder.ToTable("transaction");
+            builder.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
+            builder.HasKey(e => e.Id);
+            builder.Property(e => e.Date).HasColumnName("date").IsRequired();
+            builder.Property(e => e.Amount).HasColumnName("amount").IsRequired();
+            builder.Property<long>("AccountId").HasColumnName("accountId");
+            builder.HasOne(e => e.Account).WithMany(t => t.Transactions).HasForeignKey("AccountId").IsRequired(); // Put virtual
+        }
+    }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new BookConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+        }
+        
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
+        
+        //public void TestEF()
+        //{
+        //    IBankService service = new BankService();
+        //    Bank bank = new Bank { Id = 1, Name = "Banque de France" };
+        //    Client owner = new Client { Id = 1, FirstName = "Cyril", LastName = "Vincent" };
+        //    Account account = service.CreateAccount(bank, owner);
+        //    service.Deposit(account, 2000);
+        //    service.Withdraw(account, 500);
+        //    FormationContext context = new FormationContext();
+        //    context.Accounts.Add(account);
+        //    context.SaveChanges();
+        //}
+
+        //[Test]
+        //public void TestLazy()
+        //{
+        //    FormationContext context = new FormationContext();
+        //    Account account = context.Accounts.First();
+        //    IList<Transaction> transactions = account.Transactions;
+        //    Transaction transaction = transactions.First();
+        //    Assert.IsNotNull(transaction);
+        //}
+
+        //[Test]
+        //public void TestInclude()
+        //{
+        //    FormationContext context = new FormationContext();
+        //    Account account = context.Accounts.Include(e => e.Transactions).First();
+        //    IList<Transaction> transactions = account.Transactions;
+        //    Transaction transaction = transactions.First();
+        //    Assert.IsNotNull(transaction);
+        //}

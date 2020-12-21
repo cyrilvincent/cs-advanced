@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace FormationCS.Contexts
 {
-    public class MediaContextFactory : IDesignTimeDbContextFactory<MediaContext>
+    public class FormationContextFactory : IDesignTimeDbContextFactory<FormationContext>
     {
-        public MediaContext CreateDbContext(string[] args)
+        public FormationContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<MediaContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<FormationContext>();
             optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=media;Integrated Security=True");
-            return new MediaContext(optionsBuilder.Options);
+            return new FormationContext(optionsBuilder.Options);
         }
 
         // dotnet tool install --global dotnet-ef

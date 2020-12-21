@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FormationCS.Entities
 {
@@ -8,8 +9,5 @@ namespace FormationCS.Entities
         public string Title { get; set; }
         public double Price { get; set; }
         public double VATPrice => Price * 1.055;
-        /*{
-            get { return Price * 1.055; }
-        }*/
     }
 }

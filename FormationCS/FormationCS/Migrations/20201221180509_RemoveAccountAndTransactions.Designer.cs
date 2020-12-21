@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FormationCS.Migrations
 {
     [DbContext(typeof(FormationContext))]
-    [Migration("20201221155229_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201221180509_RemoveAccountAndTransactions")]
+    partial class RemoveAccountAndTransactions
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,8 @@ namespace FormationCS.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("title");
 
                     b.HasKey("Id");
 

@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace FormationCS.Contexts
 {
-    public class MediaContext : DbContext
+    public class FormationContext : DbContext
     {
-        public MediaContext() : base() { }
-        public MediaContext(DbContextOptions options) : base(options) { }
+        public FormationContext() : base() { }
+        public FormationContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<Book> Books { get; set; }
 

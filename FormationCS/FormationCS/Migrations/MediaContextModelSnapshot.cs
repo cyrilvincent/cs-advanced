@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FormationCS.Migrations
 {
-    [DbContext(typeof(MediaContext))]
+    [DbContext(typeof(FormationContext))]
     partial class MediaContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

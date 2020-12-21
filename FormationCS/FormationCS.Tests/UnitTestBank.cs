@@ -3,6 +3,8 @@ using FormationCS.Entities;
 using FormationCS.Services;
 using System.Collections.Generic;
 using System.Linq;
+using FormationCS.Contexts;
+using Microsoft.EntityFrameworkCore;
 
 namespace FormationCS.Tests
 {
@@ -73,6 +75,7 @@ namespace FormationCS.Tests
             Assert.IsNull(results.FirstOrDefault());
             accounts.Where(a => a.Owner.FirstName != null && a.Owner.FirstName == "Cyril");
         }
+
 
 
     }

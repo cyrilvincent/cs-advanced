@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FormationCS.Migrations
 {
-    [DbContext(typeof(MediaContext))]
+    [DbContext(typeof(FormationContext))]
     [Migration("20201221155624_SecondMigration")]
     partial class SecondMigration
     {

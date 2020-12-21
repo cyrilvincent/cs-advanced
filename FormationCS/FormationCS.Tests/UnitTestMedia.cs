@@ -64,7 +64,7 @@ namespace FormationCS.Tests
         [Test]
         public void TestEFSimple()
         {
-            MediaContext context = new MediaContext();
+            FormationContext context = new FormationContext();
             context.Books.Add(new Book { Title = "C#", Price = 10 });
             context.Books.Add(new Book { Title = "EF", Price = 12 });
             context.SaveChanges();

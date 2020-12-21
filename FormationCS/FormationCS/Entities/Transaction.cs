@@ -13,5 +13,6 @@ namespace FormationCS.Entities
         public double Amount { get; set; }
 
 
+
     }
 }
