@@ -1,3 +1,5 @@
+using FormationCS.Entities;
+using FormationCS.Services;
 using NUnit.Framework;
 
 namespace FormationCS.Tests
@@ -27,6 +29,14 @@ namespace FormationCS.Tests
         {
             Book book = new Book { Id = 1, Price = 10.0, Title = "C#" };
             Assert.AreEqual(10.55, book.VATPrice,0.001);
+        }
+
+        [Test]
+        public void TestMediaService()
+        {
+            IMediaService service = new MediaService();
+            Book b = service.GetById(1);
+            Assert.AreEqual(1, b.Id);
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace FormationCS.MediaEntities
+namespace FormationCS.Entities
 {
-    public class Book
+    public class Book : IEntity
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Title { get; set; }
         public double Price { get; set; }
         public double VATPrice => Price * 1.055;
