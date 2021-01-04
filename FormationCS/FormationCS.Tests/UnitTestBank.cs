@@ -76,6 +76,27 @@ namespace FormationCS.Tests
             accounts.Where(a => a.Owner.FirstName != null && a.Owner.FirstName == "Cyril");
         }
 
+        [Test]
+        public void TestEFSimple()
+        {
+            FormationContext context = new FormationContext();
+            /*Bank bank = new Bank { Name = "CyrilBank" };
+            context.Banks.Add(bank);
+            context.SaveChanges();*/
+            Bank bank = context.Banks.First();
+            Assert.AreEqual(bank.Name, "CyrilBank");
+        }
+
+        public void CreateUpdateDeleteEF()
+        {
+            FormationContext context = new FormationContext();
+            // Créer un Account SaveChanges
+            // Requêter le compte créé
+            // Modifier la balance du compte
+            // Asserter
+            // Supprimer le compte
+        }
+
 
 
     }

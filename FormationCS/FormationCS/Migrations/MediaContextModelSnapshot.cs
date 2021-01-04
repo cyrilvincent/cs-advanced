@@ -18,6 +18,45 @@ namespace FormationCS.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
+            modelBuilder.Entity("FormationCS.Entities.Account", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .UseIdentityColumn();
+
+                    b.Property<double>("Balance")
+                        .HasColumnType("float")
+                        .HasColumnName("balance");
+
+                    b.Property<bool>("IsClose")
+                        .HasColumnType("bit")
+                        .HasColumnName("isclose");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("account");
+                });
+
+            modelBuilder.Entity("FormationCS.Entities.Bank", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("bank");
+                });
+
             modelBuilder.Entity("FormationCS.Entities.Book", b =>
                 {
                     b.Property<long>("Id")

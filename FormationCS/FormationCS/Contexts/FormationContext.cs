@@ -11,10 +11,13 @@ namespace FormationCS.Contexts
 {
     public class FormationContext : DbContext
     {
-        public FormationContext() : base() { }
+        public FormationContext() : base() {
+        }
         public FormationContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<Bank> Banks { get; set; }
+        public virtual DbSet<Bank> Accounts { get; set; }
 
         public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
@@ -30,6 +33,8 @@ namespace FormationCS.Contexts
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new BookConfiguration());
+            modelBuilder.ApplyConfiguration(new BankConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountConfiguration());
         }
     }
 }
