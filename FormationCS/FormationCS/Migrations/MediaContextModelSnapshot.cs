@@ -19,6 +19,21 @@ namespace FormationCS.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
+            modelBuilder.Entity("BankClient", b =>
+                {
+                    b.Property<long>("BanksId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ClientsId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("BanksId", "ClientsId");
+
+                    b.HasIndex("ClientsId");
+
+                    b.ToTable("bank_client");
+                });
+
             modelBuilder.Entity("FormationCS.Entities.Account", b =>
                 {
                     b.Property<long>("Id")
@@ -85,6 +100,24 @@ namespace FormationCS.Migrations
                     b.ToTable("book");
                 });
 
+            modelBuilder.Entity("FormationCS.Entities.Client", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Client");
+                });
+
             modelBuilder.Entity("FormationCS.Entities.Transaction", b =>
                 {
                     b.Property<long>("Id")
@@ -109,6 +142,21 @@ namespace FormationCS.Migrations
                     b.HasIndex("accountId");
 
                     b.ToTable("transaction");
+                });
+
+            modelBuilder.Entity("BankClient", b =>
+                {
+                    b.HasOne("FormationCS.Entities.Bank", null)
+                        .WithMany()
+                        .HasForeignKey("BanksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FormationCS.Entities.Client", null)
+                        .WithMany()
+                        .HasForeignKey("ClientsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FormationCS.Entities.Account", b =>

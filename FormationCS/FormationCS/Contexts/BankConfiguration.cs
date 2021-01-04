@@ -18,6 +18,7 @@ namespace FormationCS.Contexts
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasColumnName("name").IsRequired();
             builder.HasMany(e => e.Accounts).WithOne();
+            builder.HasMany(e => e.Clients).WithMany(c => c.Banks).UsingEntity(j => j.ToTable("bank_client"));
         }
     }
 }
