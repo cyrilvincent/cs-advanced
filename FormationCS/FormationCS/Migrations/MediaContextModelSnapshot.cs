@@ -46,6 +46,10 @@ namespace FormationCS.Migrations
                         .HasColumnType("float")
                         .HasColumnName("balance");
 
+                    b.Property<DateTime?>("DateTime")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("datetime");
+
                     b.Property<bool>("IsClose")
                         .HasColumnType("bit")
                         .HasColumnName("isclose");

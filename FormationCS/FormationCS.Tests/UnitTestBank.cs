@@ -147,5 +147,21 @@ namespace FormationCS.Tests
             account.Balance = 50;
             context.SaveChanges();
         }
+
+        [Test]
+        public void ManyToManyEF()
+        {
+            FormationContext context = new FormationContext();
+            Bank b = context.Banks.First();
+            Client c1 = new Client { FirstName = "Cyril", LastName = "Vincent" };
+            b.Clients.Add(c1);
+            Client c2 = new Client { FirstName = "Toto", LastName = "Titi" };
+            b.Clients.Add(c2);
+            Bank b2 = new Bank { Name = "NewBank" };
+            context.Banks.Add(b2);
+            context.SaveChanges();
+            c2.Banks.Add(b2);
+            context.SaveChanges();
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace FormationCS.Contexts
             builder.Property(e => e.Balance).HasColumnName("balance").IsRequired();
             builder.Property(e => e.IsClose).HasColumnName("isclose").IsRequired();
             builder.HasMany(e => e.Transactions).WithOne();
+            builder.Property(e => e.DateTime).HasColumnName("datetime");
         }
     }
 }
