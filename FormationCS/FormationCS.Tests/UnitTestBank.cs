@@ -163,5 +163,15 @@ namespace FormationCS.Tests
             c2.Banks.Add(b2);
             context.SaveChanges();
         }
+
+        [Test]
+        public void ServiceWithEF()
+        {
+            FormationContext context = new FormationContext();
+            IBankService service = new BankService(context);
+            
+
+        }
+
     }
 }
