@@ -87,17 +87,53 @@ namespace FormationCS.Tests
             Assert.AreEqual(bank.Name, "CyrilBank");
         }
 
+        [Test]
         public void CreateUpdateDeleteEF()
         {
             FormationContext context = new FormationContext();
-            // Créer un Account SaveChanges
-            // Requêter le compte créé
-            // Modifier la balance du compte
-            // Asserter
-            // Supprimer le compte
+            Account account = new Account { };
+            context.Accounts.Add(account);
+            context.SaveChanges();
+            account = context.Accounts.First();
+            account.Balance += 100;
+            context.SaveChanges();
+            context.Accounts.Remove(account);
+            context.SaveChanges();
         }
 
+        [Test]
+        public void LazyEf()
+        {
+            FormationContext context = new FormationContext();
+            Bank bank = context.Banks.First();
+            Account account = new Account { };
+            bank.Accounts.Add(account);
+            context.SaveChanges();
 
+        }
 
+        [Test]
+        public void LazyEf2()
+        {
+            FormationContext context = new FormationContext();
+            Bank bank = context.Banks.First();
+            // Pas de jointure
+            foreach (Bank b in context.Banks)
+            {
+                // b.Id
+            }
+            // Lazy Loading
+            Assert.AreEqual(0, bank.Accounts.First().Balance);
+            // Include Eagger Loading
+            var banks = context.Banks.Include(e => e.Accounts);
+            // Lazy Join
+            var res = context.Banks.Where(b => b.Accounts.Count == 0).Include(e => e.Accounts);
+            foreach (Bank b in res)
+            {
+            }
+
+            // Bank 1-* Account 1-* Transaction
+            // Tester avec 2 Accounts et 2-3 Transactions
+        }
     }
 }

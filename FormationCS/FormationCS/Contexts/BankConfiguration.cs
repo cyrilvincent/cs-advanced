@@ -17,6 +17,7 @@ namespace FormationCS.Contexts
             builder.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasColumnName("name").IsRequired();
+            builder.HasMany(e => e.Accounts).WithOne();
         }
     }
 }

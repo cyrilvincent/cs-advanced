@@ -17,7 +17,7 @@ namespace FormationCS.Contexts
 
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
-        public virtual DbSet<Bank> Accounts { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
 
         public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
 

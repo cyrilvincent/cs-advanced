@@ -34,7 +34,12 @@ namespace FormationCS.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("isclose");
 
+                    b.Property<long>("bankId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("bankId");
 
                     b.ToTable("account");
                 });
@@ -77,6 +82,22 @@ namespace FormationCS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("book");
+                });
+
+            modelBuilder.Entity("FormationCS.Entities.Account", b =>
+                {
+                    b.HasOne("FormationCS.Entities.Bank", "Bank")
+                        .WithMany("Accounts")
+                        .HasForeignKey("bankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bank");
+                });
+
+            modelBuilder.Entity("FormationCS.Entities.Bank", b =>
+                {
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }

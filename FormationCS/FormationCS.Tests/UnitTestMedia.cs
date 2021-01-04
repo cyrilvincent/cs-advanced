@@ -67,9 +67,12 @@ namespace FormationCS.Tests
             FormationContext context = new FormationContext();
             context.Books.Add(new Book { Title = "C#", Price = 10 });
             context.Books.Add(new Book { Title = "EF", Price = 12 });
+            
             context.SaveChanges();
             var res = context.Books.Where(b => b.Price < 11).First();
             Assert.AreEqual("C#", res.Title);
+            res.Price += 1;
+            context.SaveChanges();
         }
 
 

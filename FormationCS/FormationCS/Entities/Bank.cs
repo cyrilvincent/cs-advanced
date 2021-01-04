@@ -10,5 +10,7 @@ namespace FormationCS.Entities
     {
         public long Id { get; init; }
         public string Name { get; set; }
+
+        public virtual List<Account> Accounts { get; private set; }
     }
 }

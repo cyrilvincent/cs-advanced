@@ -16,7 +16,7 @@ namespace FormationCS.Contexts
             builder.ToTable("account");
             builder.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
             builder.HasKey(e => e.Id);
-            builder.Ignore(e => e.Bank);
+            builder.HasOne(e => e.Bank).WithMany(b => b.Accounts).HasForeignKey("bankId").IsRequired();
             builder.Ignore(e => e.Owner);
             builder.Property(e => e.Balance).HasColumnName("balance").IsRequired();
             builder.Property(e => e.IsClose).HasColumnName("isclose").IsRequired();

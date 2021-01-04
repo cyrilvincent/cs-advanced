@@ -10,7 +10,7 @@ namespace FormationCS.Entities
     {
         public long Id { get; init; }
 
-        public Bank Bank { get; set; }
+        public virtual Bank Bank { get; set; }
         public Client Owner { get; set; }
 
         public double Balance { get; set; }
