@@ -14,7 +14,7 @@ namespace FormationCS.Entities
         public Client Owner { get; set; }
 
         public double Balance { get; set; }
-        public IList<Transaction> Transactions { get; set; } = new List<Transaction>();
+        public virtual IList<Transaction> Transactions { get; set; } = new List<Transaction>();
         public bool IsClose { get; set; } = true;
     }
 }

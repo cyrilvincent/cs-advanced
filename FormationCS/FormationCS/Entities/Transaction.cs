@@ -11,6 +11,7 @@ namespace FormationCS.Entities
         public long Id { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public double Amount { get; set; }
+        public virtual Account Account { get; set; }
 
 
 

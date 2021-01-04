@@ -20,7 +20,7 @@ namespace FormationCS.Contexts
             builder.Ignore(e => e.Owner);
             builder.Property(e => e.Balance).HasColumnName("balance").IsRequired();
             builder.Property(e => e.IsClose).HasColumnName("isclose").IsRequired();
-            builder.Ignore(e => e.Transactions);
+            builder.HasMany(e => e.Transactions).WithOne();
         }
     }
 }

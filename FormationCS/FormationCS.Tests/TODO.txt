@@ -1,11 +1,4 @@
 ﻿
-        0/ Renommer le contexte en FormationContext
-        1/ Reprendre dans le détail la configuration Book
-        2/ TP : Idem pour Bank (avec Ignore) (1 seul contexte)
-        3/ Faire 1-N avec Publisher-*Book (s'inspirer de ci dessous)
-        3.1/ Lazy & Include
-        4/ TP : Account-*Transactions et Bank-*Account
-        5/ N-M avec Cart
         6/ TP : Bank*-*Client
         7/ Services
         8/ Adapter + DTO

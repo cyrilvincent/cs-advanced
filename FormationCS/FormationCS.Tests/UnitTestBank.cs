@@ -135,5 +135,17 @@ namespace FormationCS.Tests
             // Bank 1-* Account 1-* Transaction
             // Tester avec 2 Accounts et 2-3 Transactions
         }
+
+        [Test]
+        public void TransactionsEF()
+        {
+            FormationContext context = new FormationContext();
+            Bank b = context.Banks.First();
+            Account account = b.Accounts.First();
+            account.Transactions.Add(new Transaction { Amount = 100 });
+            account.Transactions.Add(new Transaction { Amount = -50 });
+            account.Balance = 50;
+            context.SaveChanges();
+        }
     }
 }
