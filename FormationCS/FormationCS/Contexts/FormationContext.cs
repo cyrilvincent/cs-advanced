@@ -28,7 +28,7 @@ namespace FormationCS.Contexts
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseLazyLoadingProxies().UseSqlServer("Data Source=.;Initial Catalog=media;Integrated Security=True");
-            }
+            }                                                                         //.UseInMemoryDatabase()
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
