@@ -16,7 +16,7 @@ namespace FormationCS.Adapters
             {
                 Id = account.Id,
                 BankName = account.Bank.Name,
-                Name = account.Owner.FirstName ?? "" + " " + account.Owner.LastName,
+                Name = account.Owner?.FirstName + " " + account.Owner.LastName,
                 Solde = account.Balance
             };
         }

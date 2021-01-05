@@ -1,5 +1,0 @@
-﻿
-        7/ Mock
-        8/ Adapter + DTO
-
-
