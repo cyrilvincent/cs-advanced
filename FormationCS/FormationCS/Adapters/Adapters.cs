@@ -39,5 +39,20 @@ namespace FormationCS.Adapters
         {
             return entities.Select(e => e.ToDTO());
         }
+
+        public static CustomerDTO ToDTO(this Customer customer)
+        {
+            return new CustomerDTO
+            {
+                Id = customer.Id,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName
+            };
+        }
+
+        public static IQueryable<CustomerDTO> ToDTOs(this IQueryable<Customer> entities)
+        {
+            return entities.Select(e => e.ToDTO());
+        }
     }
 }

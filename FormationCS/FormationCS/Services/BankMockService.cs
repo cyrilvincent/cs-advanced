@@ -46,6 +46,11 @@ namespace FormationCS.Services
             throw new NotImplementedException();
         }
 
+        public bool DeleteAccountById(long id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Deposit(Account account, double amount)
         {
             throw new NotImplementedException();
@@ -67,6 +72,11 @@ namespace FormationCS.Services
         }
 
         public Bank GetBankById(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer GetCustomerById(long id)
         {
             throw new NotImplementedException();
         }

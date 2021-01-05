@@ -14,6 +14,9 @@ namespace FormationCS.Services
         Account GetAccountById(long id);
         Account CreateAccount(Bank bank, Customer owner);
         Customer CreateCustomer(string firstName, string lastName);
+        Customer GetCustomerById(long id);
+        bool DeleteAccountById(long id);
+
 
         void Deposit(Account account, double amount); // Security
         double Withdraw(Account account, double amount); // amount <= balance throws Exception

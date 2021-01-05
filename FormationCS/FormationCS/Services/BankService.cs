@@ -112,5 +112,17 @@ namespace FormationCS.Services
         {
             return Context.Accounts.Include(e => e.Bank).Include(e => e.Owner).Where(a => a.Owner.Id == id);
         }
+
+        public Customer GetCustomerById(long id)
+        {
+            return Context.Customers.Where(c => c.Id == id).FirstOrDefault();
+        }
+
+        public bool DeleteAccountById(long id)
+        {
+            Account account = GetAccountById(id);
+            Context.Accounts.Remove(account);
+            return true;
+        }
     }
 }

@@ -16,12 +16,14 @@ namespace FormationCS.WebAPILight.Controllers
     public class FormationController : Controller
     {
 
-        private readonly FormationContext _context = new FormationContext();
-        private readonly BankService _service; 
+        private readonly IBankService _service;
 
-        public FormationController()
+        // IoC Inversion Of Control = Je ne veux accéder qu'à des interfaces
+        // IoD Injection Of Dependency = Factory automatique
+
+        public FormationController(IBankService service)
         {
-            _service = new BankService(_context);
+            _service = service;
         }
 
         [HttpGet]
@@ -98,11 +100,39 @@ namespace FormationCS.WebAPILight.Controllers
             return bank;
         }
 
-        [HttpPut]
+        [HttpDelete]
         [Route("api/bank/{id:long}")]
         public bool DeleteBank(long id)
         {
             //_service.DeleteBank(id);
+            _service.Save();
+            return true;
+        }
+
+        [HttpPost]
+        [Route("api/account")]
+        public AccountDTO CreateCustomer(AccountForCreateDTO accountDTO)
+        {
+            Bank bank = _service.GetBankById(accountDTO.BankId);
+            if(bank == null)
+            {
+                throw new BankException("Bank does not exist");
+            }
+            Customer customer = _service.GetCustomerById(accountDTO.CustomerId);
+            if (customer == null)
+            {
+                throw new BankException("Customer does not exist");
+            }
+            Account account = _service.CreateAccount(bank, customer);
+            _service.Save();
+            return account.ToDTO();
+        }
+
+        [HttpDelete]
+        [Route("api/account/{id:long}")]
+        public bool DeleteAccount(long id)
+        {
+            _service.DeleteAccountById(id);
             _service.Save();
             return true;
         }

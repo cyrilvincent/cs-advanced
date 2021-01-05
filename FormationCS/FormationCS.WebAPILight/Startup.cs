@@ -1,3 +1,5 @@
+using FormationCS.Contexts;
+using FormationCS.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +34,10 @@ namespace FormationCS.WebAPILight
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FormationCS.WebAPILight", Version = "v1" });
             });
+            services.AddScoped<IBankService, BankService>();
+            //services.AddTransient<IBankService, BankService>();
+            //services.AddSingleton<IBankService, BankService>();
+            services.AddDbContext<FormationContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
