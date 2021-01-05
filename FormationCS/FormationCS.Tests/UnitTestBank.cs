@@ -220,6 +220,16 @@ namespace FormationCS.Tests
             Account account = service.GetAccountById(12);
             AccountDTO dto = account.ToDTO();
             var dtos = service.GetAccountsByCustomerId(1).ToDTOs();
+            Assert.AreEqual(250, dtos.First().Solde);
+            Assert.AreEqual("Cyril Vincent", dtos.First().Name);
+        }
+
+        [Test]
+        public void TestBankDTO()
+        {
+            Bank bank = new Bank { Id = 1, Name = "Cyril" };
+            BankDTO dto = bank.ToDTO();
+            Assert.AreEqual(1, dto.Id);
         }
 
     }

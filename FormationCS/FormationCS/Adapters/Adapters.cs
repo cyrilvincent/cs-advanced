@@ -10,13 +10,27 @@ namespace FormationCS.Adapters
 {
     public static class Adapters
     {
+        public static BankDTO ToDTO(this Bank bank)
+        {
+            return new BankDTO
+            {
+                Id = bank.Id,
+                Name = bank.Name
+            };
+        }
+
+        public static IQueryable<BankDTO> ToDTOs(this IQueryable<Bank> entities)
+        {
+            return entities.Select(e => e.ToDTO());
+        }
+
         public static AccountDTO ToDTO(this Account account)
         {
             return new AccountDTO
             {
                 Id = account.Id,
                 BankName = account.Bank.Name,
-                Name = account.Owner?.FirstName + " " + account.Owner.LastName,
+                Name = (account.Owner?.FirstName ?? "") + " " + account.Owner.LastName,
                 Solde = account.Balance
             };
         }
@@ -25,10 +39,5 @@ namespace FormationCS.Adapters
         {
             return entities.Select(e => e.ToDTO());
         }
-
-        // BankDTO
-        // Adapter BankDTO
-        // Tester
-        // Idem pour AccountDTO
     }
 }
