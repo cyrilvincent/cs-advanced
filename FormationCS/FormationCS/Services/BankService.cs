@@ -1,4 +1,5 @@
 ﻿using FormationCS.Contexts;
+using Microsoft.EntityFrameworkCore;
 using FormationCS.Entities;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace FormationCS.Services
 
         public Account GetAccountById(long id)
         {
-            return Context.Accounts.Where(a => a.Id == id).FirstOrDefault();
+            return Context.Accounts.Include(e => e.Bank).Include(e => e.Owner).Where(a => a.Id == id).FirstOrDefault();
         }
 
         public Bank GetBankById(long id)
@@ -103,13 +104,13 @@ namespace FormationCS.Services
 
         public IQueryable<Account> GetAccountsByAmountLargerThan(double amount)
         {
-            return Context.Accounts.Where(a => a.Transactions.Any(t => t.Amount > amount));
+            return Context.Accounts.Include(e => e.Bank).Include(e => e.Owner).Where(a => a.Transactions.Any(t => t.Amount > amount));
             //return Context.Transactions.Where(t => t.Amount > amount).Select(t => t.Account).Distinct();
         }
 
         public IQueryable<Account> GetAccountsByCustomerId(long id)
         {
-            return Context.Accounts.Where(a => a.Owner.Id == id);
+            return Context.Accounts.Include(e => e.Bank).Include(e => e.Owner).Where(a => a.Owner.Id == id);
         }
     }
 }
