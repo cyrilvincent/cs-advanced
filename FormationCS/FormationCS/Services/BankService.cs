@@ -21,9 +21,9 @@ namespace FormationCS.Services
             account.IsClose = true;
         }
 
-        public Account CreateAccount(Bank bank, Client owner)
+        public Account CreateAccount(Bank bank, Customer owner)
         {
-            Account a = new Account { Bank = bank, Owner = owner };
+            Account a = new Account { Bank = bank, Owner = owner, IsClose = false };
             bank.Accounts.Add(a);
             return a;
         }
@@ -35,14 +35,20 @@ namespace FormationCS.Services
             return b;
         }
 
-        public Client CreateClient(string firstName, string lastName)
+        public Customer CreateCustomer(string firstName, string lastName)
         {
-            throw new NotImplementedException();
+            Customer c = new Customer { FirstName = firstName, LastName = lastName };
+            Context.Customers.Add(c);
+            return c;
         }
 
         public void Deposit(Account account, double amount)
         {
-            if(amount>0)
+            if(account.IsClose)
+            {
+                throw new BankException($"Error account is closed");
+            }
+            else if(amount>0)
             {
                 Transaction transaction = new Transaction { Amount = amount };
                 account.Transactions.Add(transaction);
@@ -61,7 +67,7 @@ namespace FormationCS.Services
 
         public Bank GetBankById(long id)
         {
-            throw new NotImplementedException();
+            return Context.Banks.Where(a => a.Id == id).FirstOrDefault();
         }
 
         public void Save()
@@ -71,7 +77,11 @@ namespace FormationCS.Services
 
         public double Withdraw(Account account, double amount)
         {
-            if (amount > 0)
+            if (account.IsClose)
+            {
+                throw new BankException($"Error account is closed");
+            }
+            else if (amount > 0)
             {
                 if (amount <= account.Balance)
                 {
@@ -89,6 +99,17 @@ namespace FormationCS.Services
             {
                 throw new BankException($"Error in withdraw amount < 0: {amount}");
             }
+        }
+
+        public IQueryable<Account> GetAccountsByAmountLargerThan(double amount)
+        {
+            return Context.Accounts.Where(a => a.Transactions.Any(t => t.Amount > amount));
+            //return Context.Transactions.Where(t => t.Amount > amount).Select(t => t.Account).Distinct();
+        }
+
+        public IQueryable<Account> GetAccountsByCustomerId(long id)
+        {
+            return Context.Accounts.Where(a => a.Owner.Id == id);
         }
     }
 }

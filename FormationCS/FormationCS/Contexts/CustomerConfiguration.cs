@@ -9,17 +9,16 @@ using System.Threading.Tasks;
 
 namespace FormationCS.Contexts
 {
-    public class BankConfiguration : IEntityTypeConfiguration<Bank>
+    public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
-        public void Configure(EntityTypeBuilder<Bank> builder)
+        public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.ToTable("bank");
+            builder.ToTable("customer");
             builder.Property(e => e.Id).HasColumnName("id").ValueGeneratedOnAdd();
             builder.HasKey(e => e.Id);
-            builder.Property(e => e.Name).HasColumnName("name").IsRequired();
-            builder.HasMany(e => e.Accounts).WithOne();
-            builder.HasMany(e => e.Customers).WithMany(c => c.Banks).UsingEntity(j => j.ToTable("bank_client"));
-           
+            builder.HasMany(e => e.Accounts);
+            builder.Property(e => e.FirstName).HasColumnName("firstname");
+            builder.Property(e => e.LastName).HasColumnName("lastname").IsRequired();
         }
     }
 }

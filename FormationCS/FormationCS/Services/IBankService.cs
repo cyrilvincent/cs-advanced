@@ -12,19 +12,15 @@ namespace FormationCS.Services
         Bank CreateBank(string name);
         Bank GetBankById(long id);
         Account GetAccountById(long id);
-        Account CreateAccount(Bank bank, Client owner);
-        Client CreateClient(string firstName, string lastName);
+        Account CreateAccount(Bank bank, Customer owner);
+        Customer CreateCustomer(string firstName, string lastName);
 
         void Deposit(Account account, double amount); // Security
         double Withdraw(Account account, double amount); // amount <= balance throws Exception
-        void Close(Account account); // IsOpen bool ??
+        void Close(Account account);
         void Save();
+        IQueryable<Account> GetAccountsByAmountLargerThan(double amount);
+        IQueryable<Account> GetAccountsByCustomerId(long id);
 
-        // Implémenter cette interface au complet
-        // Tester
-        // Gérer le IsClose
-        // Gérer Account *-1 Client
-        // GetAccountsByClientLastName(lastName) => IEnumerable<Account>
-        // GetAccountsByAmountLargerThan(amount) => IEnumerable<Account>
     }
 }

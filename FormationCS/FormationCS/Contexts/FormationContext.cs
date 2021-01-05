@@ -19,6 +19,7 @@ namespace FormationCS.Contexts
         public virtual DbSet<Bank> Banks { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
 
         public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
@@ -37,6 +38,7 @@ namespace FormationCS.Contexts
             modelBuilder.ApplyConfiguration(new BankConfiguration());
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
         }
     }
 }

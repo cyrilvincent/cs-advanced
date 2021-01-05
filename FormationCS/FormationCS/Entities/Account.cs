@@ -11,7 +11,7 @@ namespace FormationCS.Entities
         public long Id { get; init; }
 
         public virtual Bank Bank { get; set; }
-        public Client Owner { get; set; }
+        public virtual Customer Owner { get; set; }
 
         public double Balance { get; set; }
         public virtual IList<Transaction> Transactions { get; set; } = new List<Transaction>();

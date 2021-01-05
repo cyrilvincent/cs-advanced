@@ -1,19 +1,5 @@
 ﻿
-        7/ Services
+        7/ Mock
         8/ Adapter + DTO
-        
-        
-        
-        //public void TestEF()
-        //{
-        //    IBankService service = new BankService();
-        //    Bank bank = new Bank { Id = 1, Name = "Banque de France" };
-        //    Client owner = new Client { Id = 1, FirstName = "Cyril", LastName = "Vincent" };
-        //    Account account = service.CreateAccount(bank, owner);
-        //    service.Deposit(account, 2000);
-        //    service.Withdraw(account, 500);
-        //    FormationContext context = new FormationContext();
-        //    context.Accounts.Add(account);
-        //    context.SaveChanges();
-        //}
+
 

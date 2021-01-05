@@ -19,17 +19,17 @@ namespace FormationCS.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
-            modelBuilder.Entity("BankClient", b =>
+            modelBuilder.Entity("BankCustomer", b =>
                 {
                     b.Property<long>("BanksId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("ClientsId")
+                    b.Property<long>("CustomersId")
                         .HasColumnType("bigint");
 
-                    b.HasKey("BanksId", "ClientsId");
+                    b.HasKey("BanksId", "CustomersId");
 
-                    b.HasIndex("ClientsId");
+                    b.HasIndex("CustomersId");
 
                     b.ToTable("bank_client");
                 });
@@ -54,12 +54,17 @@ namespace FormationCS.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("isclose");
 
-                    b.Property<long>("bankId")
+                    b.Property<long>("bankid")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("customerid")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("bankId");
+                    b.HasIndex("bankid");
+
+                    b.HasIndex("customerid");
 
                     b.ToTable("account");
                 });
@@ -104,22 +109,26 @@ namespace FormationCS.Migrations
                     b.ToTable("book");
                 });
 
-            modelBuilder.Entity("FormationCS.Entities.Client", b =>
+            modelBuilder.Entity("FormationCS.Entities.Customer", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
+                        .HasColumnName("id")
                         .UseIdentityColumn();
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("firstname");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("lastname");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Client");
+                    b.ToTable("customer");
                 });
 
             modelBuilder.Entity("FormationCS.Entities.Transaction", b =>
@@ -148,7 +157,7 @@ namespace FormationCS.Migrations
                     b.ToTable("transaction");
                 });
 
-            modelBuilder.Entity("BankClient", b =>
+            modelBuilder.Entity("BankCustomer", b =>
                 {
                     b.HasOne("FormationCS.Entities.Bank", null)
                         .WithMany()
@@ -156,9 +165,9 @@ namespace FormationCS.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FormationCS.Entities.Client", null)
+                    b.HasOne("FormationCS.Entities.Customer", null)
                         .WithMany()
-                        .HasForeignKey("ClientsId")
+                        .HasForeignKey("CustomersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -167,11 +176,19 @@ namespace FormationCS.Migrations
                 {
                     b.HasOne("FormationCS.Entities.Bank", "Bank")
                         .WithMany("Accounts")
-                        .HasForeignKey("bankId")
+                        .HasForeignKey("bankid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FormationCS.Entities.Customer", "Owner")
+                        .WithMany("Accounts")
+                        .HasForeignKey("customerid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Bank");
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("FormationCS.Entities.Transaction", b =>
@@ -191,6 +208,11 @@ namespace FormationCS.Migrations
                 });
 
             modelBuilder.Entity("FormationCS.Entities.Bank", b =>
+                {
+                    b.Navigation("Accounts");
+                });
+
+            modelBuilder.Entity("FormationCS.Entities.Customer", b =>
                 {
                     b.Navigation("Accounts");
                 });
