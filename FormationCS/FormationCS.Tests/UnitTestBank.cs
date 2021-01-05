@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using FormationCS.Contexts;
 using Microsoft.EntityFrameworkCore;
+using FormationCS.DTOs;
+using FormationCS.Adapters;
 
 namespace FormationCS.Tests
 {
@@ -193,6 +195,31 @@ namespace FormationCS.Tests
             IBankService service = new BankService(context);
             var accounts = service.GetAccountsByCustomerId(1);
             Assert.AreEqual(1, accounts.Count());
+        }
+
+        [Test]
+        public void TestDTO()
+        {
+            FormationContext context = new FormationContext();
+            IBankService service = new BankService(context);
+            var accounts = service.GetAccountsByCustomerId(1);
+            accounts.Select(a => new AccountDTO
+            {
+                Id = a.Id,
+                BankName = a.Bank.Name
+
+            });
+
+        }
+
+        [Test]
+        public void TestAccountDTO()
+        {
+            FormationContext context = new FormationContext();
+            IBankService service = new BankService(context);
+            Account account = service.GetAccountById(12);
+            AccountDTO dto = account.ToDTO();
+            var dtos = service.GetAccountsByCustomerId(1).ToDTOs();
         }
 
     }
