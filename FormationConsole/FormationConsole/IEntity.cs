@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace FormationConsole
 {
-    public class Magazine : IEntity
+    internal interface IEntity
     {
-        public int Id { get; set; }
-        public List<Shelf> Shelves { get; set; } = [];
-
-
     }
 }

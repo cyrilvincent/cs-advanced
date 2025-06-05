@@ -7,8 +7,9 @@ var r1 = new Rectangle { Width = 3.2, Length = 2 };
 var r2 = new Rectangle(3.2, 2);
 var r3 = new Rectangle(width:2, length:2);
 Console.WriteLine(r1.Surface);
+Console.WriteLine(r1.GetPerimeter());
 
-List<Rectangle> list = new List<Rectangle>();
+List<Rectangle> list = new List<Rectangle>();    
 list.Add(r1);
 list.Add(new Square(3));
 
