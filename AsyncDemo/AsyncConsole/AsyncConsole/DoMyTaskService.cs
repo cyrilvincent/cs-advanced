@@ -100,6 +100,7 @@ namespace AsyncConsole
             var number = await numberTask;
             var upper = await upperTask;
             await emailTask;
+            
             Console.WriteLine("[{0}] Sortie de la méthode DoMyTasksV5.", DateTime.Now);
             return string.Format("{0}-{1}", number, upper);
         }

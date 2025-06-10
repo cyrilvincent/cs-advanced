@@ -9,6 +9,7 @@
     <ShowAsCollectionAssociation>
       <Property Name="Shelves" />
     </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="FormationConsole.Shelf">
     <Position X="5" Y="0.5" Width="1.5" />
@@ -20,12 +21,13 @@
   <Class Name="FormationConsole.Rectangle">
     <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAEBEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAACAAgAAAAAAAAEBEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Rectangle.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="Point" />
     </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="FormationConsole.Point">
     <Position X="10.5" Y="0.5" Width="1.5" />

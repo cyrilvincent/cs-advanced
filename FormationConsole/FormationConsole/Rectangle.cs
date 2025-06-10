@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FormationConsole
 {
-    public class Rectangle
+    public class Rectangle : IDisposable
     {
         public double Length { get; set; } = 0;
         public double Width { get; set; } = 0;
@@ -28,6 +28,11 @@ namespace FormationConsole
         public virtual double Surface
         {
             get { return Length * Width; }
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
 
     }
