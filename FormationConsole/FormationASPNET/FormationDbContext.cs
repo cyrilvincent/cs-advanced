@@ -12,6 +12,7 @@ namespace FormationASPNET
         }
 
         public DbSet<Magazine> Magazines { get; set; }
+        public DbSet<Shelf> Shelves { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

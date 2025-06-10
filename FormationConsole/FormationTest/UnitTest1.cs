@@ -56,5 +56,24 @@ namespace FormationTest
             context.Magazines.Add(magazine);
             context.SaveChanges();
         }
+
+
+        [Test]
+        public void AddShelfToMagazine()
+        {
+            var magazine = context.Magazines.Where(m => m.Id == 1).First();
+            var shelf = new Shelf { Diameter = 2, Height = 3 };
+            /*shelf.Magazine = magazine;
+            context.Shelves.Add(shelf);*/
+            magazine.Shelves.Add(shelf);
+            context.SaveChanges();
+        }
+
+        [Test]
+        public void ShelfJoin()
+        {
+            var magazine = context.Magazines.Include(m => m.Shelves).Where(m => m.Shelves.Any(s => s.Diameter == 2)).First();
+            
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace FormationASPNET.Configurations
 
             builder.Property(entity => entity.Height).HasColumnName("height").IsRequired();
             builder.Property(entity => entity.Stack).HasColumnName("stack");
+            
         }
     }
 }

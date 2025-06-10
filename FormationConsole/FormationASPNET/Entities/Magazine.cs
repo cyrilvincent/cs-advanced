@@ -6,5 +6,8 @@
 
         public int Height { get; set; }
         public int? Stack { get; set; }
+
+        public ICollection<Shelf> Shelves { get; set; } = [];
+
     }
 }
