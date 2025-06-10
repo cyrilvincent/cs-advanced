@@ -1,0 +1,16 @@
+﻿Créer IEntity
+Créer les Entities
+Installer EF et le driver SQL Server
+Ajouter dans appsettings.json : "ConnectionStrings": {
+    "FormationDb": "Data Source=localhost;Initial Catalog=Formation;Integrated Security=True;Encrypt=False"
+  }
+Ajouter dans program.cs var connectionString = builder.Configuration.GetConnectionString("FormationDb")!;
+Créer le contexte (Hérite de DbContext et Constructeur avec options)
+Créer le configurations
+Ajouter la DI dans program.cs : builder.Services.AddDbContext<FormationDbContext>(options =>
+{
+    options.UseSqlServer(connectionString)
+           .LogTo(Console.WriteLine);
+});
+dotnet tool install --global dotnet-ef
+dotnet ef migrations add InitialCreate

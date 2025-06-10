@@ -36,7 +36,9 @@ foreach (Rectangle rectangle in result3)
     Console.WriteLine(rectangle);
 }
 
-// Créer une liste de shelves et requeter par diameter, tri
+var demoYield = new DemoYield();
+demoYield.CallInfinite();
+
 
 
 

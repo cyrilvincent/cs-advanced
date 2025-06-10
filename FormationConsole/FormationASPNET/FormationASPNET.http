@@ -1,0 +1,6 @@
+@FormationASPNET_HostAddress = http://localhost:5126
+
+GET {{FormationASPNET_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
