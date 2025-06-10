@@ -11,11 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("FormationDb")!;
-builder.Services.AddDbContext<FormationDbContext>(options =>
-{
-    options.UseSqlServer(connectionString)
-           .LogTo(Console.WriteLine);
-});
+Injections.InjectDbContext(builder.Services, connectionString);
 
 
 var app = builder.Build();

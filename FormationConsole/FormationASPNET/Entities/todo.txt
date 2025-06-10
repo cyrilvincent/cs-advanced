@@ -13,4 +13,12 @@ Ajouter la DI dans program.cs : builder.Services.AddDbContext<FormationDbContext
            .LogTo(Console.WriteLine);
 });
 dotnet tool install --global dotnet-ef
+Ajouter dans le contexte : protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(MagazineConfiguration))!);
+        }
 dotnet ef migrations add InitialCreate
+dotnet ef database update
+
+
