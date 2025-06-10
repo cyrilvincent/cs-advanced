@@ -1,4 +1,5 @@
 using FormationASPNET;
+using FormationASPNET.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,10 +42,19 @@ namespace FormationTest
         }
 
         [Test]
-        public void GetMagazines()
+        public void GetMagazineById()
         {
-            var magazines = context.Magazines.ToList();
-            Assert.That(0, Is.EqualTo(magazines.Count));
+            var magazine = context.Magazines.Where(m => m.Id == 1).FirstOrDefault();
+            Assert.That(3, Is.EqualTo(magazine?.Height));
+        }
+
+
+        [Test]
+        public void AddMagazine()
+        {
+            var magazine = new Magazine { Height = 3 };
+            context.Magazines.Add(magazine);
+            context.SaveChanges();
         }
     }
 }
