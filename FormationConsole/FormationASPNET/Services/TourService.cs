@@ -1,14 +1,17 @@
-﻿using FormationASPNET.Entities;
+﻿using FormationASPNET.Adapters;
+using FormationASPNET.DTOs;
+using FormationASPNET.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FormationASPNET.Services
 {
     public interface ITourService
     {
         Shelf AddShelfToMagazine(Shelf shelf, Magazine magazine);
-        Magazine? GetMagazineById(long id);
-        IQueryable<Magazine> GetMagazines();
+        MagazineDTO? GetMagazineById(long id);
+        IQueryable<MagazineDTO> GetMagazines();
         Shelf? GetShelfById(long id);
-        IQueryable<Shelf> GetShelfByMagazine(Magazine magazine);
+        IEnumerable<Shelf> GetShelfByMagazine(Magazine magazine);
     }
 
     public class TourService : ITourService
@@ -19,27 +22,30 @@ namespace FormationASPNET.Services
             this._context = context;
         }
 
-        public IQueryable<Magazine> GetMagazines()
+        public IQueryable<MagazineDTO> GetMagazines()
         {
-            return this._context.Magazines;
+            return this._context.Magazines.Select(m => m.ToMagazineDTO());
         }
-        public Magazine? GetMagazineById(long id)
+        public MagazineDTO? GetMagazineById(long id)
         {
-            return null;
+            return this._context.Magazines.Include(m => m.Shelves).Where(m => m.Id == id).FirstOrDefault()?.ToMagazineDTO();
         }
 
-        public IQueryable<Shelf> GetShelfByMagazine(Magazine magazine)
+        public IEnumerable<Shelf> GetShelfByMagazine(Magazine magazine)
         {
-            return null;
+            return magazine.Shelves;
         }
 
         public Shelf? GetShelfById(long id)
         {
-            return null;
+            return this._context.Shelves.FirstOrDefault(s => s.Id == id);
         }
 
         public Shelf AddShelfToMagazine(Shelf shelf, Magazine magazine)
         {
+
+            magazine.Shelves.Add(shelf);
+            this._context.SaveChanges();
             return shelf;
         }
 
