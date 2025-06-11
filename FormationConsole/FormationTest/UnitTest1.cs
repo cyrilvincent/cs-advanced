@@ -1,5 +1,6 @@
 using FormationASPNET;
 using FormationASPNET.Entities;
+using FormationASPNET.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,7 @@ namespace FormationTest
             var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
             var services = new ServiceCollection();
             Injections.InjectDbContext(services, configuration.GetConnectionString("FormationDb")!);
+            Injections.InjectServices(services);
             var builder = new DbContextOptionsBuilder<FormationDbContext>();
             serviceProvider = services.AddEntityFrameworkSqlServer().BuildServiceProvider();
             builder.UseSqlServer(configuration.GetConnectionString("FormationDb")).UseInternalServiceProvider(serviceProvider);
@@ -74,6 +76,46 @@ namespace FormationTest
         {
             var magazine = context.Magazines.Include(m => m.Shelves).Where(m => m.Shelves.Any(s => s.Diameter == 2)).First();
             
+        }
+
+        [Test]
+        public void TestIoC()
+        {
+            var services = new ServiceCollection();
+            services.AddScoped<IEntity, Magazine>();
+            var serviceProvider = services.BuildServiceProvider();
+
+            var entity = serviceProvider.GetService<IEntity>();
+            Assert.That(entity, Is.Not.Null);
+            var magazine = (Magazine) entity;
+
+
+        }
+
+        [Test]
+        public void TestDI()
+        {
+            var services = new ServiceCollection();
+            services.AddScoped<IEntity, Magazine>();
+            services.AddSingleton<ITourService, TourService>();
+            services.AddDbContext<FormationDbContext>();
+            var serviceProvider = services.BuildServiceProvider();
+
+            var entity = serviceProvider.GetService<ITourService>();
+            Assert.That(entity, Is.Not.Null);
+            var tourService = (TourService)entity;
+
+
+        }
+
+        [Test]
+        public void TestDIInject()
+        {
+            var entity = serviceProvider.GetService<ITourService>();
+            Assert.That(entity, Is.Not.Null);
+            var tourService = (TourService)entity;
+
+
         }
     }
 }

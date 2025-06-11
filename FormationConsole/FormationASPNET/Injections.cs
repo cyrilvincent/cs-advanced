@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FormationASPNET.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace FormationASPNET
 {
@@ -11,6 +12,11 @@ namespace FormationASPNET
                 options.UseSqlServer(connectionString)
                        .LogTo(Console.WriteLine);
             });
+        }
+
+        public static void InjectServices(IServiceCollection services)
+        {
+            services.AddScoped<ITourService, TourService>();
         }
     }
 }

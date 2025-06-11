@@ -1,4 +1,5 @@
 using FormationASPNET;
+using FormationASPNET.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("FormationDb")!;
 Injections.InjectDbContext(builder.Services, connectionString);
+Injections.InjectServices(builder.Services);
 
 
 var app = builder.Build();
