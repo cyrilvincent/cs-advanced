@@ -15,6 +15,9 @@ var connectionString = builder.Configuration.GetConnectionString("FormationDb")!
 Injections.InjectDbContext(builder.Services, connectionString);
 Injections.InjectServices(builder.Services);
 
+builder.Services.AddGrpc();
+
+
 
 var app = builder.Build();
 
@@ -30,5 +33,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGrpcService<TourService>();
 
 app.Run();
